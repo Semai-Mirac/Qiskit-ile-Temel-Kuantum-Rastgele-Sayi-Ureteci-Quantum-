@@ -1,5 +1,11 @@
 # Qiskit-ile-Temel-Kuantum-Rastgele-Sayi-Ureteci-Quantum-
+
+### Açıklama:
 IBM'in Quantum alanındaki Qiskit teknolojisini anlamak adına yapılmıştır.
+
+### Kullanılan Teknolojiler:
+Python, Qiskit
+
 
 ## IBM_Qiskit.py kod dosyasının çalışma şekli
 1. QuantumCircuit(num_bits, num_bits): Hem kuantum hesaplaması yapacağımız qubitleri, hem de okuma sonucunu kaydedeceğimiz klasik bitleri ayırıyoruz.
