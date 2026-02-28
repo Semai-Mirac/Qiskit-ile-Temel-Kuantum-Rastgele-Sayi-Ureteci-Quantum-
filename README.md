@@ -4,13 +4,13 @@ Bu proje, IBM'in Qiskit kütüphanesini kullanarak kuantum mekaniğinin temel pr
 ## 🚀 Proje Hakkında:
 Klasik bilgisayarlar "sözde rastgele" (pseudo-random) sayılar üretirken, kuantum bilgisayarlar kuantum durumlarının ölçümündeki belirsizliği kullanarak "gerçek rastgele" (true-random) sayılar üretir. Bu projede:
 
-Süperpozisyon: Hadamard (H) kapısı ile qubitlerin durumları belirsizleştirilir.
-Ölçüm: Belirsizlik hali çöktürülerek klasik bit dizilerine (0 ve 1) dönüştürülür.
+- Süperpozisyon: Hadamard (H) kapısı ile qubitlerin durumları belirsizleştirilir.
+- Ölçüm: Belirsizlik hali çöktürülerek klasik bit dizilerine (0 ve 1) dönüştürülür.
 
 ## 🛠️ Kullanılan Teknolojiler:
-Dil: Python
-Kütüphaneler: qiskit, qiskit-aer, qiskit-ibm-runtime, python-dotenv
-Platform: IBM Quantum Platform
+- Dil: Python
+- Kütüphaneler: qiskit, qiskit-aer, qiskit-ibm-runtime, python-dotenv
+- Platform: IBM Quantum Platform
 
 ## 📁 Dosya Yapısı ve Çalışma Mantığı
 ### IBM_Qiskit.py (Yerel Simülasyon)
