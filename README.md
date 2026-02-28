@@ -1,35 +1,65 @@
-# Qiskit-ile-Temel-Kuantum-Rastgele-Sayi-Ureteci-Quantum-
+Qiskit ile Kuantum Rastgele Sayı Üreteci (QRNG)
+Bu proje, IBM'in Qiskit kütüphanesini kullanarak kuantum mekaniğinin temel prensiplerinden biri olan süperpozisyon yardımıyla gerçek rastgele sayılar üretmeyi amaçlar. Proje kapsamında hem yerel simülatör (Aer) hem de gerçek kuantum donanımı (IBM Quantum) üzerinde testler gerçekleştirilmiştir.
 
-### Açıklama:
-IBM'in Quantum alanındaki Qiskit teknolojisini anlamak adına yapılmıştır. IBM'im sanal ve gerçek makineleri ayrı kod dosyalrında denenmiştir
+🚀 Proje Hakkında
+Klasik bilgisayarlar "sözde rastgele" (pseudo-random) sayılar üretirken, kuantum bilgisayarlar kuantum durumlarının ölçümündeki belirsizliği kullanarak "gerçek rastgele" (true-random) sayılar üretir. Bu projede:
 
-### Kullanılan Teknolojiler:
-Python, Qiskit
+Süperpozisyon: Hadamard (H) kapısı ile qubitlerin durumları belirsizleştirilir.
 
+Ölçüm: Belirsizlik hali çöktürülerek klasik bit dizilerine (0 ve 1) dönüştürülür.
 
-## IBM_Qiskit.py kod dosyasının çalışma şekli: Sanal Makine
-1. QuantumCircuit(num_bits, num_bits): Hem kuantum hesaplaması yapacağımız qubitleri, hem de okuma sonucunu kaydedeceğimiz klasik bitleri ayırıyoruz.
+🛠️ Kullanılan Teknolojiler
+Dil: Python
 
-2. qc.h(i) (Hadamard Kapısı): Qubitleri %50 0, %50 1 olacağı rastgele bir faza (süperpozisyona) hapseder. Kuantum mekaniğinin asıl büyüsü buradadır!
+Kütüphaneler: qiskit, qiskit-aer, qiskit-ibm-runtime, python-dotenv
 
-3. qc.measure(...) (Ölçüm): Bu süperpozisyon çökertilir ve klasik evrendeki kesin hali (0 veya 1) olarak okunur.
+Platform: IBM Quantum Platform
 
-4. AerSimulator & shots=1: Devremizi Qiskit'in Aer simülatöründe 1 kez çalıştırıyoruz çünkü tek bir atış, ihtiyacımız olan bir serilik rastgele rakam dizisini üretmek için yeterlidir.
+📁 Dosya Yapısı ve Çalışma Mantığı
+1. IBM_Qiskit.py (Yerel Simülasyon)
+Bu dosya, kuantum devresini kendi işlemcinizde simüle etmek için tasarlanmıştır. Geliştirme ve hızlı test aşamaları için idealdir.
 
-## IBM_Qiskit_2.py kod dosyasının Kurulum ve Çalıştırma Adımları: Gerçek Makine
-1. Gerekli Kütüphaneler:
-qiskit-ibm-runtime ve python-dotenv paketlerini sisteminize kurun.
+Süreç: 1. QuantumCircuit ile istenen bit sayısında devre oluşturulur.
+2. Hadamard (H) Kapısı: Qubitler %50 olasılıkla 0 veya 1 olacak şekilde süperpozisyona alınır.
+3. Ölçüm: qc.measure() ile kuantum durumu okunur ve klasik bitlere yazılır.
+4. Simülatör: AerSimulator kullanılarak devre yerel olarak koşturulur.
 
-2. .env Dosyası:
-Proje ana dizinize (yani kod dosyasının yanına) .env adında bir dosya hazırda vardır ve içine IBM'den aldıgınız anahtarı girin:
+2. IBM_Qiskit_2.py (Gerçek Kuantum Donanımı)
+Bu dosya, oluşturulan devreyi internet üzerinden gerçek bir IBM kuantum bilgisayarına gönderir.
 
-3. API Anahtarı Nereden Alınır?:
-Eğer henüz almadıysanız:
+Süreç:
 
-IBM Quantum Cloud sayfasına gidin.
-Giriş yapın veya ücretsiz bir hesap açın.
-Ana sayfada (Dashboard) sağ üstteki menüde veya profil kısmında "API Token" (Kopyala) bölümünü göreceksiniz. Bunu kopyalayıp .env dosyasına yapıştırın.
+QiskitRuntimeService ile IBM bulut sistemine bağlanılır.
 
+Backend Seçimi: least_busy metodu ile o an kuyruğu en az olan gerçek cihaz otomatik seçilir.
+
+Transpile: Devre, seçilen cihazın fiziksel mimarisine göre optimize (derleme) edilir.
+
+Job: İşlem bir "Job" (görev) olarak gönderilir ve sonuçlar dönene kadar kuyrukta beklenir.
+
+⚙️ Kurulum ve Yapılandırma
+1. Kütüphanelerin Kurulumu
+Terminal üzerinden gerekli paketleri yükleyin:
+
+Bash
+pip install qiskit qiskit-aer qiskit-ibm-runtime python-dotenv
+2. API Anahtarı (Token) Ayarı
+Gerçek cihazı kullanabilmek için bir IBM Quantum hesabına ihtiyacınız vardır:
+
+IBM Quantum adresine gidin.
+
+Hesabınızdan API Token değerini kopyalayın.
+
+Proje klasöründe .env isimli bir dosya oluşturun ve içine yapıştırın:
+
+Kod snippet'i
+IBM_QUANTUM_TOKEN=KOPYALADIĞINIZ_TOKEN_BURAYA
+⚠️ Önemli Notlar ve Uyarılar
+Kuyruk Bekleme: Gerçek kuantum bilgisayarları dünya genelinde ortak kullanıldığı için IBM_Qiskit_2.py dosyasını çalıştırdığınızda "kuyruk" (queue) durumuna göre sonuçların gelmesi birkaç dakikadan birkaç saate kadar sürebilir.
+
+Güvenlik: .env dosyanızı ve API anahtarınızı asla GitHub gibi halka açık platformlarda paylaşmayın. Projenize .gitignore dosyasını ekleyerek .env dosyasını hariç tutun.
+
+Hizmet Kesintisi: Kuantum cihazları bakımda olabilir; bu durumda kod least_busy aşamasında hata verebilir veya farklı bir cihaz seçebilir.
 
 ## Önemli Uyarılar:
 
